@@ -48,6 +48,7 @@ dependencies:
   mime: ^1.0.1
   lottie: ^1.2.2
   syncfusion_flutter_datepicker: ^20.1.48
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
