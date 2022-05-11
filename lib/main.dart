@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurantapp/presentation/widgets/app_bar.dart';
+import 'package:restaurantapp/presentation/widgets/bottom_navigation.dart';
+import 'package:restaurantapp/presentation/widgets/search_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,82 +47,14 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(
           child: ListView(
         padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
+        children: const [
+          DrawerHeader(
             child: Text('Welcome Gica!'),
             decoration: BoxDecoration(color: Colors.blue),
           ),
-          const ListTile(title: Text('Home')),
+          ListTile(title: Text('Home')),
         ],
       )),
-      body: Column(
-        children: [],
-      ),
     );
-  }
-}
-
-class BottomNavbar extends StatelessWidget {
-  const BottomNavbar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(items: const <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-          icon: Icon(Icons.restaurant_menu_sharp), label: 'Menu'),
-      BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Order'),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle), label: 'Account'),
-    ]);
-  }
-}
-
-class AppBarTitle extends StatelessWidget {
-  const AppBarTitle({
-    Key? key,
-    required this.widget,
-  }) : super(key: key);
-
-  final MyHomePage widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text(widget.title));
-  }
-}
-
-class MySearchDelegate extends SearchDelegate {
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-          onPressed: () {
-            if (query.isEmpty) {
-              close(context, null);
-            } else {
-              query = '';
-            }
-          },
-          icon: Icon(Icons.clear))
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-        onPressed: () => close(context, null), icon: Icon(Icons.arrow_back));
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return const Center(child: Text('Hungry?  Get some food'));
   }
 }
