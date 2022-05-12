@@ -30,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: const BottomNavbar(),
       drawer: Drawer(
           child: ListView(
+        shrinkWrap: true,
         padding: EdgeInsets.zero,
         children: const [
           DrawerHeader(

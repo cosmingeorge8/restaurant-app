@@ -17,21 +17,21 @@ class _CategoryCardState extends State<CategoryCard> {
     var size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(25),
-        ),
-        border: Border.fromBorderSide(BorderSide(
-          color: Colors.black,
-          width: 1,
-        )),
-      ),
       width: size.width / 5,
       child: InkWell(
         onTap: () {},
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [const Icon(Icons.no_drinks), Text(widget.category.name)],
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  widget.category.imgPath,
+                  width: 100,
+                  height: size.height / 10,
+                )),
+            Text(widget.category.name)
+          ],
         ),
       ),
     );
