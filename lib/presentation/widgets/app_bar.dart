@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../main.dart';
+import '../pages/home.dart';
 
 class AppBarTitle extends StatelessWidget {
   const AppBarTitle({
