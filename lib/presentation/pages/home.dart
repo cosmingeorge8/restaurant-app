@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile(title: Text('Home')),
         ],
       )),
-      body: MainPageBody(),
+      body: const MainPageBody(),
     );
   }
 }
