@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/entities/product.dart';
+import '../pages/product_detail.dart';
 
 // ignore: must_be_immutable
 class ProductCard extends StatefulWidget {
@@ -17,69 +18,50 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          Container(
-            height: 130,
-            width: 180,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                  image: NetworkImage(widget.product.images[0]),
-                  fit: BoxFit.fitHeight),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 2,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(widget.product.name),
-                Text('\$' + widget.product.price.toString()),
-                Container(
+    return Hero(
+      tag: widget.product.name,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: InkWell(
+          onTap: () => openProductDetail(),
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.blue[600],
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        onPressed: () => decreaseAmount(),
-                        icon: const Icon(Icons.remove),
-                      ),
-                      Text(amount.toString()),
-                      IconButton(
-                        onPressed: () => increaseAmount(),
-                        icon: const Icon(Icons.add),
-                      ),
-                    ],
+                    borderRadius: BorderRadius.circular(16),
+                    image: DecorationImage(
+                        image: NetworkImage(widget.product.images[0]),
+                        fit: BoxFit.contain),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      widget.product.name,
+                    ),
+                    Text(
+                      '\$' + widget.product.price.toString(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  void increaseAmount() {
-    amount++;
-    setState(() {});
-  }
-
-  decreaseAmount() {
-    if (amount == 0) {
-      return;
-    }
-    amount--;
-    setState(() {});
+  openProductDetail() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ProductDetailPage(product: widget.product),
+    ));
   }
 }
