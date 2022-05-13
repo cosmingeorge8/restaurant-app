@@ -13,56 +13,73 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
+  int amount = 0;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Stack(
+      child: Column(
         children: [
           Container(
-            height: 150,
+            height: 130,
             width: 180,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                    image: NetworkImage(widget.product.images[0]),
-                    fit: BoxFit.fitHeight)),
+              borderRadius: BorderRadius.circular(16),
+              image: DecorationImage(
+                  image: NetworkImage(widget.product.images[0]),
+                  fit: BoxFit.fitHeight),
+            ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Opacity(
-              opacity: 0.70,
-              child: Container(
-                height: 30,
-                decoration: BoxDecoration(
-                  color: Colors.blue[600],
-                  borderRadius: BorderRadius.circular(15),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 2,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(widget.product.name),
+                Text('\$' + widget.product.price.toString()),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue[600],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        onPressed: () => decreaseAmount(),
+                        icon: const Icon(Icons.remove),
+                      ),
+                      Text(amount.toString()),
+                      IconButton(
+                        onPressed: () => increaseAmount(),
+                        icon: const Icon(Icons.add),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      padding: const EdgeInsets.only(bottom: 0),
-                      onPressed: () {},
-                      icon: const Icon(Icons.remove),
-                    ),
-                    const Text('0'),
-                    IconButton(
-                      padding: const EdgeInsets.only(bottom: 0),
-                      onPressed: () {},
-                      icon: const Icon(Icons.add),
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  void increaseAmount() {
+    amount++;
+    setState(() {});
+  }
+
+  decreaseAmount() {
+    if (amount == 0) {
+      return;
+    }
+    amount--;
+    setState(() {});
   }
 }
