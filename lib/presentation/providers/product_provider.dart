@@ -14,7 +14,7 @@ class ProductProvider with ChangeNotifier {
       ],
     ),
     Product(
-      name: 'Cola',
+      name: 'Carbonara',
       description: 'Mare bautur',
       price: 5,
       available: true,
@@ -23,7 +23,7 @@ class ProductProvider with ChangeNotifier {
       ],
     ),
     Product(
-      name: 'Cola',
+      name: 'Beer',
       description: 'Mare bautur',
       price: 5,
       available: true,
@@ -32,7 +32,7 @@ class ProductProvider with ChangeNotifier {
       ],
     ),
     Product(
-      name: 'Cola',
+      name: 'Fanta',
       description: 'Mare bautur',
       price: 5,
       available: true,
