@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:restaurantapp/presentation/pages/tables_page.dart';
 
 import '../widgets/app_bar.dart';
-import '../widgets/bottom_navigation.dart';
 import '../widgets/main_body.dart';
 import '../widgets/search_bar.dart';
+import 'orders_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -15,6 +16,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +30,55 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.search)),
         ],
       ),
-      bottomNavigationBar: const BottomNavbar(),
       drawer: Drawer(
-          child: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        children: const [
-          DrawerHeader(
-            child: Text('Welcome Gica!'),
-            decoration: BoxDecoration(color: Colors.blue),
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          children: const [
+            DrawerHeader(
+              child: Text('Welcome Gica!'),
+              decoration: BoxDecoration(color: Colors.blue),
+            ),
+            ListTile(title: Text('Home')),
+          ],
+        ),
+      ),
+      body: getBody(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_menu_sharp),
+            label: 'Menu',
           ),
-          ListTile(title: Text('Home')),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.table_restaurant_rounded),
+            label: 'Tables',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Order',
+          ),
         ],
-      )),
-      body: const MainPageBody(),
+        currentIndex: _selectedIndex,
+        onTap: (value) {
+          _selectedIndex = value;
+          print(_selectedIndex);
+          setState(() {});
+        },
+      ),
     );
+  }
+
+  getBody() {
+    switch (_selectedIndex) {
+      case 0:
+        return const MainPageBody();
+      case 1:
+        return TablesPage();
+      case 2:
+        return OrdersPage();
+      default:
+        throw Exception('Ilegal state exception');
+    }
   }
 }

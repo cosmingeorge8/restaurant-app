@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurantapp/presentation/providers/order_provider.dart';
 
 import '../../data/entities/product.dart';
 
@@ -50,6 +52,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               width: size.width / 3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const Text('Add to order'),
                   const Icon(Icons.shopping_basket),
@@ -75,6 +78,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   addToOrder() {
+    if (quantity <= 0) {
+      //TODO show some error
+      return;
+    }
+    Provider.of<OrderProvider>(context, listen: false)
+        .addOrderLine(widget.product, quantity);
     Navigator.pop(context);
   }
 }

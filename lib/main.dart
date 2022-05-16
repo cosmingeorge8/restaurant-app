@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp/presentation/pages/home.dart';
 import 'package:restaurantapp/presentation/providers/category_provider.dart';
+import 'package:restaurantapp/presentation/providers/order_provider.dart';
 import 'package:restaurantapp/presentation/providers/product_provider.dart';
 
 void main() {
@@ -11,6 +12,9 @@ void main() {
     ),
     ChangeNotifierProvider(
       create: (_) => CategoryProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => OrderProvider(),
     ),
   ], child: const MyApp()));
 }
