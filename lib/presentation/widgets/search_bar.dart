@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp/data/entities/product.dart';
+import 'package:restaurantapp/presentation/providers/order_provider.dart';
 import 'package:restaurantapp/presentation/providers/product_provider.dart';
 import 'package:restaurantapp/presentation/widgets/products_grid_view.dart';
 
@@ -73,6 +74,7 @@ class SearchSuggestion extends StatefulWidget {
 
 class _SearchSuggestionState extends State<SearchSuggestion> {
   var quantity = 0;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -107,6 +109,10 @@ class _SearchSuggestionState extends State<SearchSuggestion> {
                     onPressed: increaseQuantity,
                     icon: const Icon(Icons.add),
                   ),
+                  IconButton(
+                    onPressed: addToOrder,
+                    icon: const Icon(Icons.add_shopping_cart),
+                  )
                 ],
               ));
   }
@@ -125,6 +131,15 @@ class _SearchSuggestionState extends State<SearchSuggestion> {
   decreaseQuantity() {
     if (quantity > 0) {
       quantity--;
+      setState(() {});
+    }
+  }
+
+  void addToOrder() async {
+    bool result = await Provider.of<OrderProvider>(context, listen: false)
+        .addOrderLine(widget.product, quantity);
+    if (result) {
+      quantity = 0;
       setState(() {});
     }
   }

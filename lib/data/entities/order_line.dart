@@ -5,7 +5,7 @@ import 'package:restaurantapp/data/entities/product.dart';
 
 class OrderLine {
   final Product product;
-  final int amount;
+  int amount;
 
   OrderLine(
     this.product,

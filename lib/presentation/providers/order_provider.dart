@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:restaurantapp/data/entities/product.dart';
 
@@ -12,7 +13,13 @@ class OrderProvider with ChangeNotifier {
 
   Future<bool> addOrderLine(Product product, int amount) async {
     if (product.available) {
-      orderLines.add(OrderLine(product, amount));
+      var result = alreadyExists(product);
+      result.fold(
+        (orderLine) => increaseQuantity(orderLine, amount),
+        (r) => orderLines.add(
+          OrderLine(product, amount),
+        ),
+      );
       return true;
     }
     return false;
@@ -21,5 +28,18 @@ class OrderProvider with ChangeNotifier {
   removeLine(OrderLine orderLine) {
     orderLines.remove(orderLine);
     notifyListeners();
+  }
+
+  Either<OrderLine, bool> alreadyExists(Product product) {
+    for (var orderLine in orderLines) {
+      if (orderLine.product == product) {
+        return Left(orderLine);
+      }
+    }
+    return const Right(false);
+  }
+
+  void increaseQuantity(OrderLine orderLine, int amount) {
+    orderLine.amount += amount;
   }
 }
