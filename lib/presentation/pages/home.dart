@@ -62,7 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: (value) {
           _selectedIndex = value;
-          print(_selectedIndex);
           setState(() {});
         },
       ),
@@ -76,9 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         return TablesPage();
       case 2:
-        return OrdersPage();
+        return const OrdersPage();
       default:
-        throw Exception('Ilegal state exception');
+        throw Exception('Illegal state exception');
     }
   }
 }

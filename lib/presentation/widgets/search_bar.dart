@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp/data/entities/product.dart';
 import 'package:restaurantapp/presentation/providers/order_provider.dart';
@@ -139,6 +140,8 @@ class _SearchSuggestionState extends State<SearchSuggestion> {
     bool result = await Provider.of<OrderProvider>(context, listen: false)
         .addOrderLine(widget.product, quantity);
     if (result) {
+      Fluttertoast.showToast(
+          msg: '${widget.product.name} was added to the order');
       quantity = 0;
       setState(() {});
     }

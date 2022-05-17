@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp/presentation/providers/order_provider.dart';
 
@@ -13,7 +14,7 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  var quantity = 0;
+  var quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -84,19 +85,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   decreaseQuantity() {
-    if (quantity > 0) {
+    if (quantity > 1) {
       quantity--;
       setState(() {});
     }
   }
 
-  addToOrder() {
+  addToOrder() async {
     if (quantity <= 0) {
-      //TODO show some error
       return;
     }
-    Provider.of<OrderProvider>(context, listen: false)
+    bool result = await Provider.of<OrderProvider>(context, listen: false)
         .addOrderLine(widget.product, quantity);
-    Navigator.pop(context);
+    if (result) {
+      Fluttertoast.showToast(
+          msg: '${widget.product.name} was added to the order');
+      Navigator.pop(context);
+      return;
+    }
+    Fluttertoast.showToast(msg: 'Product not available');
   }
 }
