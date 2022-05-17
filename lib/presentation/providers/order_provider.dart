@@ -4,17 +4,22 @@ import 'package:restaurantapp/data/entities/product.dart';
 import '../../data/entities/order_line.dart';
 
 class OrderProvider with ChangeNotifier {
-  List<OrderLine> products = [];
+  List<OrderLine> orderLines = [];
 
   Future<List<OrderLine>> getOrderLines() async {
-    return products;
+    return orderLines;
   }
 
   Future<bool> addOrderLine(Product product, int amount) async {
     if (product.available) {
-      products.add(OrderLine(product, amount));
+      orderLines.add(OrderLine(product, amount));
       return true;
     }
     return false;
+  }
+
+  removeLine(OrderLine orderLine) {
+    orderLines.remove(orderLine);
+    notifyListeners();
   }
 }

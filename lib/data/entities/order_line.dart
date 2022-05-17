@@ -12,6 +12,8 @@ class OrderLine {
     this.amount,
   );
 
+  get lineTotal => product.price * amount;
+
   OrderLine copyWith({
     Product? product,
     int? amount,

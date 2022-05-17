@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurantapp/presentation/widgets/product_card.dart';
+import 'package:restaurantapp/presentation/widgets/products_grid_view.dart';
 
 import '../providers/product_provider.dart';
 
@@ -31,17 +31,9 @@ class PopularProducts extends StatelessWidget {
                   if (!snapshot.hasData && snapshot.hasError) {
                     return const Text('Something went wrong');
                   }
-                  return GridView.builder(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, mainAxisSpacing: 15),
-                      itemBuilder: (context, index) {
-                        return ProductCard(product: snapshot.data[index]);
-                      });
+                  return ProdutsGridView(
+                    products: snapshot.data,
+                  );
                 }
                 return const Text('Something went wrong');
               }),
