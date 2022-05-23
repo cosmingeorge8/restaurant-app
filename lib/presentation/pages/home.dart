@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurantapp/presentation/pages/tables_page.dart';
+import 'package:restaurantapp/presentation/providers/tables_provider.dart';
 
-import '../widgets/app_bar.dart';
 import '../widgets/main_body.dart';
 import '../widgets/search_bar.dart';
 import 'bill_page.dart';
@@ -23,7 +24,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppBarTitle(widget: widget),
+        title: Center(
+          child: Text(
+              'Table ${Provider.of<TableProvider>(context, listen: true).currentTable.tableNumber}'),
+        ),
         actions: [
           IconButton(
               onPressed: () =>
