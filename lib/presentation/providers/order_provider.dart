@@ -42,4 +42,14 @@ class OrderProvider with ChangeNotifier {
   void increaseQuantity(OrderLine orderLine, int amount) {
     orderLine.amount += amount;
   }
+
+  double getLinesTotal() {
+    double totalAmt = 0;
+    for (var orderLine in orderLines) {
+      totalAmt += orderLine.lineTotal;
+    }
+    return totalAmt;
+  }
+
+  submitOrder() {}
 }

@@ -4,6 +4,7 @@ import 'package:restaurantapp/presentation/pages/tables_page.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/main_body.dart';
 import '../widgets/search_bar.dart';
+import 'bill_page.dart';
 import 'orders_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -34,12 +35,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
+          children: [
+            const DrawerHeader(
               child: Text('Welcome Gica!'),
               decoration: BoxDecoration(color: Colors.blue),
             ),
-            ListTile(title: Text('Home')),
+            const ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.table_restaurant),
+              title: const Text('Tables'),
+              onTap: () => showTablesScreen(),
+            ),
           ],
         ),
       ),
@@ -51,12 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Menu',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.table_restaurant_rounded),
-            label: 'Tables',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Order',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt),
+            label: 'Bill',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -73,11 +82,17 @@ class _MyHomePageState extends State<MyHomePage> {
       case 0:
         return const MainPageBody();
       case 1:
-        return TablesPage();
-      case 2:
         return const OrdersPage();
+      case 2:
+        return const BillPage();
       default:
         throw Exception('Illegal state exception');
     }
+  }
+
+  showTablesScreen() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const TablesPage(),
+    ));
   }
 }
