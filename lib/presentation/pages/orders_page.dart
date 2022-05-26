@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurantapp/data/entities/order_line.dart';
+import 'package:restaurantapp/presentation/providers/bottom_navigation_provider.dart';
 import 'package:restaurantapp/presentation/providers/order_provider.dart';
 
 class OrdersPage extends StatelessWidget {
@@ -70,7 +72,9 @@ class OrdersPage extends StatelessWidget {
 
   void submitOrder(BuildContext context) async {
     bool result =
-        await Provider.of<OrderProvider>(context, listen: true).submitOrder();
+        await Provider.of<OrderProvider>(context, listen: false).submitOrder();
+    Fluttertoast.showToast(msg: 'Order was sent');
+    Provider.of<BottomNavigationProvider>(context, listen: false).setIndex(0);
   }
 }
 

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurantapp/presentation/pages/tables_page.dart';
 import 'package:restaurantapp/presentation/providers/tables_provider.dart';
 
+import '../providers/bottom_navigation_provider.dart';
 import '../widgets/main_body.dart';
 import '../widgets/search_bar.dart';
 import 'bill_page.dart';
@@ -18,21 +19,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
           child: Text(
-              'Table ${Provider.of<TableProvider>(context, listen: true).currentTable.tableNumber}'),
+            Provider.of<TableProvider>(context, listen: true)
+                .currentTable
+                .toString(),
+          ),
         ),
         actions: [
           IconButton(
-              onPressed: () =>
-                  showSearch(context: context, delegate: MySearchDelegate()),
-              icon: const Icon(Icons.search)),
+            onPressed: () => showSearch(
+              context: context,
+              delegate: MySearchDelegate(),
+            ),
+            icon: const Icon(Icons.search),
+          ),
         ],
       ),
       drawer: Drawer(
@@ -72,9 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Bill',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex:
+            Provider.of<BottomNavigationProvider>(context, listen: true)
+                .selectedIndex,
         onTap: (value) {
-          _selectedIndex = value;
+          Provider.of<BottomNavigationProvider>(context, listen: false)
+              .selectedIndex = value;
           setState(() {});
         },
       ),
@@ -82,7 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getBody() {
-    switch (_selectedIndex) {
+    switch (Provider.of<BottomNavigationProvider>(context, listen: false)
+        .selectedIndex) {
       case 0:
         return const MainPageBody();
       case 1:

@@ -51,5 +51,10 @@ class OrderProvider with ChangeNotifier {
     return totalAmt;
   }
 
-  submitOrder() {}
+  submitOrder() {
+    //TODO send order to backend
+
+    orderLines = [];
+    notifyListeners();
+  }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:restaurantapp/data/entities/table.dart' as t;
 
 class TableProvider with ChangeNotifier {
-  late t.Table currentTable;
+  t.Table? currentTable;
 
   List<t.Table> tables = [
     t.Table(tableNumber: 1),

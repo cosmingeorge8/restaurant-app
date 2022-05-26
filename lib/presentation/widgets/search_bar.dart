@@ -78,44 +78,55 @@ class _SearchSuggestionState extends State<SearchSuggestion> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return ListTile(
-        onTap: () => openProductDetail(context),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 16,
-        ),
-        leading: Image.network(widget.product.images[0]),
-        title: Text(widget.product.name),
-        subtitle: quantity == 0
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(widget.product.description),
-                  IconButton(
-                    onPressed: () => increaseQuantity(),
-                    icon: const Icon(Icons.add),
-                  ),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(widget.product.description),
-                  IconButton(
-                    onPressed: decreaseQuantity,
-                    icon: const Icon(Icons.remove),
-                  ),
-                  Text(quantity.toString()),
-                  IconButton(
-                    onPressed: increaseQuantity,
-                    icon: const Icon(Icons.add),
-                  ),
-                  IconButton(
-                    onPressed: addToOrder,
-                    icon: const Icon(Icons.add_shopping_cart),
-                  )
-                ],
-              ));
+      onTap: () => openProductDetail(context),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
+      leading: Image.network(widget.product.images[0]),
+      title: Text(widget.product.name),
+      subtitle: quantity == 0
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  height: size.height / 5,
+                  width: size.width / 3,
+                  child: Text(widget.product.description),
+                ),
+                IconButton(
+                  onPressed: () => increaseQuantity(),
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  height: size.height / 5,
+                  width: size.width / 5,
+                  child: Text(widget.product.description),
+                ),
+                IconButton(
+                  onPressed: decreaseQuantity,
+                  icon: const Icon(Icons.remove),
+                ),
+                Text(quantity.toString()),
+                IconButton(
+                  onPressed: increaseQuantity,
+                  icon: const Icon(Icons.add),
+                ),
+                IconButton(
+                  onPressed: addToOrder,
+                  icon: const Icon(Icons.add_shopping_cart),
+                )
+              ],
+            ),
+    );
   }
 
   void openProductDetail(BuildContext context) {

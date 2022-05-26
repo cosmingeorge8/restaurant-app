@@ -48,12 +48,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
-                          onPressed: () => decreaseQuantity(),
-                          icon: const Icon(Icons.remove)),
+                        onPressed: () => decreaseQuantity(),
+                        icon: const Icon(Icons.remove),
+                      ),
                       Text(quantity.toString()),
                       IconButton(
-                          onPressed: () => increaseQuantity(),
-                          icon: const Icon(Icons.add)),
+                        onPressed: () => increaseQuantity(),
+                        icon: const Icon(Icons.add),
+                      ),
                     ],
                   ),
                 ),
