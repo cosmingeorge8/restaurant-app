@@ -6,6 +6,8 @@ import 'package:restaurantapp/data/entities/order_line.dart';
 import 'package:restaurantapp/presentation/providers/bottom_navigation_provider.dart';
 import 'package:restaurantapp/presentation/providers/order_provider.dart';
 
+import '../widgets/order_line_widget.dart';
+
 class OrdersPage extends StatelessWidget {
   const OrdersPage({Key? key}) : super(key: key);
 
@@ -75,27 +77,5 @@ class OrdersPage extends StatelessWidget {
         await Provider.of<OrderProvider>(context, listen: false).submitOrder();
     Fluttertoast.showToast(msg: 'Order was sent');
     Provider.of<BottomNavigationProvider>(context, listen: false).setIndex(0);
-  }
-}
-
-class OrderLineWidget extends StatelessWidget {
-  final OrderLine orderLine;
-  const OrderLineWidget({
-    Key? key,
-    required this.orderLine,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 16,
-      ),
-      leading: Image.network(orderLine.product.images[0]),
-      title: Text(orderLine.product.name),
-      subtitle: Text(
-          '${orderLine.amount} x \$${orderLine.product.price} = \$${orderLine.lineTotal}'),
-    );
   }
 }

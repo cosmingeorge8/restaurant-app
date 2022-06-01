@@ -17,7 +17,7 @@ class TableListTile extends StatelessWidget {
   }
 
   setTable(BuildContext context) async {
-    Provider.of<TableProvider>(context, listen: false).currentTable = table;
+    Provider.of<TableProvider>(context, listen: false).setCurrentTable(table);
     Navigator.of(context).pop();
   }
 }

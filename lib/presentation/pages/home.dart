@@ -25,9 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            Provider.of<TableProvider>(context, listen: true)
-                .currentTable
-                .toString(),
+            Provider.of<TableProvider>(context, listen: true).getCurrentTable(),
           ),
         ),
         actions: [

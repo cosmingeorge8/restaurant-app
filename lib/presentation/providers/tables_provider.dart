@@ -12,4 +12,15 @@ class TableProvider with ChangeNotifier {
   Future<List<t.Table>> getTables() async {
     return tables;
   }
+
+  void setCurrentTable(t.Table table) {
+    currentTable = table;
+    notifyListeners();
+  }
+
+  String getCurrentTable() {
+    return currentTable != null
+        ? currentTable!.toString()
+        : 'No table selected';
+  }
 }
